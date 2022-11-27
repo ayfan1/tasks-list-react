@@ -4,6 +4,7 @@ import Header from "./Header";
 import Section from "./Section";
 import Tasks from "./Tasks";
 import Container from "./Container";
+import React, {useState} from "react";
 
 
 const tasks = [
@@ -13,7 +14,12 @@ const tasks = [
 
 
 function App() {
-  const hideDone = false;
+  const [hideDone, setHideDone] = useState(false);
+
+  const toggleHideDone = () => {
+    setHideDone(hideDone => !hideDone);
+  };
+
   return (
     <Container>
         <Header title="Tasks list" />
@@ -28,7 +34,11 @@ function App() {
           <Tasks tasks={tasks} hideDone={hideDone} />
         }
           extraHeaderContent={
-          <Buttons tasks={tasks} hideDone={hideDone} />
+          <Buttons 
+            tasks={tasks}
+            hideDone={hideDone}
+            toggleHideDone={toggleHideDone} 
+          />
         }
         />
     </Container>
